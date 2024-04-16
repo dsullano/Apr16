@@ -14,9 +14,7 @@ public class MySQLConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             c = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             System.out.println("Database Connection Success");
-        }catch(SQLException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
+        }catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
 
@@ -24,6 +22,11 @@ public class MySQLConnection {
     }
 
     public static void main(String[] args) {
-        getConnection();
+        Connection c = getConnection();
+        try{
+            c.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }
